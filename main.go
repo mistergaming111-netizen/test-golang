@@ -1,23 +1,38 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+	"strconv"
+)
 
 func main() {
-    question := "Devine un nombre entre 1 et 10"
-    fmt.Println(question)
-    nombreSecret := 7
-    fmt.Println("Entre ton nombre :")
-    var choix int
-    fmt.Scan(&choix)
-    for choix < 1 || choix > 10 {
-        fmt.Println("Le nombre doit être entre 1 et 10. Entre un nouveau nombre :")
-        fmt.Scan(&choix)
-    }
-    if choix == nombreSecret {
-        fmt.Println("Bravo ! Tu as deviné le nombre secret.")
-    }else if choix < nombreSecret {
-        fmt.Println("Le nombre secret est plus grand que ton choix.")
-    } else {
-        fmt.Println("Le nombre secret est plus petit que ton choix.")
-    }
+
+	nombreSecret := 7
+
+	// Permet à Go de servir index.html et styles.css
+	http.Handle("/", http.FileServer(http.Dir(".")))
+
+	// Gestion du jeu
+	http.HandleFunc("/deviner", func(w http.ResponseWriter, r *http.Request) {
+
+		choix, _ := strconv.Atoi(r.FormValue("choix"))
+
+		if choix < 1 || choix > 10 {
+			fmt.Fprint(w, "Le nombre doit être entre 1 et 10.")
+			return
+		}
+
+		if choix == nombreSecret {
+			fmt.Fprint(w, "Bravo ! Tu as deviné le nombre secret.")
+		} else if choix < nombreSecret {
+			fmt.Fprint(w, "Le nombre secret est plus grand.")
+		} else {
+			fmt.Fprint(w, "Le nombre secret est plus petit.")
+		}
+	})
+
+	fmt.Println("Serveur lancé sur http://localhost:8080")
+
+	http.ListenAndServe(":8080", nil)
 }

@@ -1,0 +1,91 @@
+
+body {
+    font-family: "Trebuchet MS", sans-serif;
+    background-image: url('backgroundSite.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+h1 {
+    color: #0a000e;
+    text-align: center;
+    font-size: 42px;
+    font-weight: bold;
+
+    text-shadow: 3px 3px 5px rgba(255, 255, 255, 0.7);
+    letter-spacing: 2px;
+}
+
+h1 {
+    animation: apparition 1s ease;
+}
+
+@keyframes apparition {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background: rgba(255, 255, 255, 0.7);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+button {
+    background-color: #0a000e;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input {
+    padding: 12px;
+    margin-bottom: 15px;
+    width: 250px;
+
+    border: 2px solid #0a000e;
+    border-radius: 10px;
+
+    font-size: 18px;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #5b006f;
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #8a00a8;
+    box-shadow: 0 0 10px rgba(138, 0, 168, 0.5);
+}
+
+button:active {
+    transform: scale(0.95);
+}
